@@ -1,26 +1,41 @@
 import React, { Component } from 'react';
 import './index.scss';
 
-class application extends Component {
+class Application extends Component {
+  constructor (props){
+    super (props);
+
+    this.state = {
+      games: [
+        
+      ]
+    }
+
+    fetch('/api/getGames') // Call the fetch function passing the url of the API as a parameter
+        .then(
+            response => response.json(),
+            error => console.log('Danger Will Robinson', error)
+        )
+        .then(data => {
+            this.setState({
+                games: data
+            })
+        })
+  }
   render() {
+
+    let gameList = this.state.games.map(game => {
+      return <div>
+        {game.gameName}
+      </div>
+    })
+
     return (
       <div className="App">
-        <header className="App-header">
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        {gameList}
       </div>
     );
   }
 }
 
-export default application;
+export default Application;

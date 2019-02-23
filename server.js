@@ -30,8 +30,8 @@ app.get('/api/getGames', (req, res) => {
     })
 });
 
-app.get('/api/createGames', (req, res) => {
-    models.Game.create({ gameName: 'Duck Game'}).then(task => {
+app.get('/api/createGame', (req, res) => {
+    models.Game.create({ gameName: req.query.name}).then(task => {
         // you can now access the newly created task via the variable task
         res.json(task);
       })
