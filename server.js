@@ -9,6 +9,7 @@ const app = express();
 
 //Models
 var models = require("./models");
+const Op = models.Sequelize.Op;
 
 // Ports
 const port = process.env.PORT || 5000;
@@ -21,19 +22,23 @@ const port = process.env.PORT || 5000;
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, '/build')));
 
-// An api endpoint that returns a short list of items
+// An api endpoint that returns all of the games
 app.get('/api/getGames', (req, res) => {
-    // find multiple entries
+    // find all games in the database
     models.Game.findAll().then(games => {
         // games will be an array of all Game instances
         res.json(games);
     })
 });
 
+// An api endpoint that returns a specific game or games
 app.get('/api/searchGameList', (req, res) => {
+    //find games that match the query
     models.Game.findAll({
         where: {
-            gameName: req.query.gameName
+            gameName: {
+                [Op.like]: req.query.gameName + "%"
+            }
         }
     }).then(games => {
         // games will be an array of all Game instances

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import './index.scss';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -94,9 +95,27 @@ class Application extends Component {
             this.setState({
                 games: data
             })
-        })
+        });
+
+    this.gameSearch=this.gameSearch.bind(this);
+
   }
+
+  gameSearch(e) {
+      fetch('/api/searchGameList?gameName=' + e.target.value) // Call the fetch function passing the url of the API as a parameter
+        .then(
+            response => response.json(),
+            error => console.log('Danger Will Robinson', error)
+        )
+        .then(data => {
+            this.setState({
+                games: data
+            })
+        });
+  }
+
   render() {
+    console.log(this.props);
     const { classes } = this.props;
 
     let gameList = this.state.games.map(game => {
@@ -132,6 +151,7 @@ class Application extends Component {
                         <SearchIcon />
                     </div>
                     <InputBase
+                        onChange={this.gameSearch}
                         placeholder="Search…"
                         classes={{
                         root: classes.inputRoot,
@@ -149,4 +169,8 @@ class Application extends Component {
   }
 }
 
-export default withStyles(styles)(Application);
+function mapStateToProps(state) {
+    return state;
+}
+
+export default connect(mapStateToProps)(withStyles(styles)(Application));

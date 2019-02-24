@@ -1,7 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/application';
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import siteReducer from './lib/reducer'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
+const store = createStore(siteReducer, {
+    gameList: [
+
+    ]
+})
 
 const theme = createMuiTheme({
     palette: {
@@ -10,7 +19,13 @@ const theme = createMuiTheme({
     typography: { useNextVariants: true },
   });
 
-ReactDOM.render(<MuiThemeProvider theme={theme}><App /></MuiThemeProvider>, document.getElementById('root'));
+ReactDOM.render(
+    <MuiThemeProvider theme={theme}>
+        <Provider store={store}>
+            <App />
+        </Provider>
+    </MuiThemeProvider>, document.getElementById('root')
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
