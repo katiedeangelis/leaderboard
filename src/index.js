@@ -2,7 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/application';
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
+import thunkMiddleware from 'redux-thunk'
+import { composeWithDevTools } from 'redux-devtools-extension'
 import siteReducer from './lib/reducer'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
@@ -10,7 +12,9 @@ const store = createStore(siteReducer, {
     gameList: [
 
     ]
-})
+}, composeWithDevTools(
+    applyMiddleware(thunkMiddleware)
+))
 
 const theme = createMuiTheme({
     palette: {

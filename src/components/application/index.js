@@ -18,6 +18,7 @@ import GamepadOutlined from '@material-ui/icons/GamepadOutlined';
 import EditOutlined from '@material-ui/icons/EditOutlined';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Tooltip from '@material-ui/core/Tooltip';
+import { Actions } from '../../lib/actions';
 
 
 const styles = theme => ({
@@ -80,45 +81,21 @@ class Application extends Component {
   constructor (props){
     super (props);
 
-    this.state = {
-      games: [
-        
-      ]
-    }
-
-    fetch('/api/getGames') // Call the fetch function passing the url of the API as a parameter
-        .then(
-            response => response.json(),
-            error => console.log('Danger Will Robinson', error)
-        )
-        .then(data => {
-            this.setState({
-                games: data
-            })
-        });
-
     this.gameSearch=this.gameSearch.bind(this);
+
+    this.props.dispatch(Actions.search(""));
 
   }
 
   gameSearch(e) {
-      fetch('/api/searchGameList?gameName=' + e.target.value) // Call the fetch function passing the url of the API as a parameter
-        .then(
-            response => response.json(),
-            error => console.log('Danger Will Robinson', error)
-        )
-        .then(data => {
-            this.setState({
-                games: data
-            })
-        });
+      this.props.dispatch(Actions.search(e.target.value));
+      
   }
 
   render() {
-    console.log(this.props);
     const { classes } = this.props;
 
-    let gameList = this.state.games.map(game => {
+    let gameList = this.props.gameList.map(game => {
       return (
         <ListItem button>
             <ListItemIcon>
