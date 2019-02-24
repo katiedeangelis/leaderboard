@@ -9,9 +9,8 @@ import siteReducer from './lib/reducer'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 const store = createStore(siteReducer, {
-    gameList: [
-
-    ]
+    gameList: [],
+    openGameLeaderboard: {}
 }, composeWithDevTools(
     applyMiddleware(thunkMiddleware)
 ))
