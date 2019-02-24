@@ -30,6 +30,17 @@ app.get('/api/getGames', (req, res) => {
     })
 });
 
+app.get('/api/searchGameList', (req, res) => {
+    models.Game.findAll({
+        where: {
+            gameName: req.query.gameName
+        }
+    }).then(games => {
+        // games will be an array of all Game instances
+        res.json(games);
+    })
+});
+
 app.get('/api/createGame', (req, res) => {
     models.Game.create({ gameName: req.query.name}).then(task => {
         // you can now access the newly created task via the variable task

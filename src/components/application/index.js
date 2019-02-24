@@ -9,10 +9,9 @@ import { withStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
-import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import GamepadOutlined from '@material-ui/icons/GamepadOutlined';
 import EditOutlined from '@material-ui/icons/EditOutlined';
@@ -102,12 +101,10 @@ class Application extends Component {
 
     let gameList = this.state.games.map(game => {
       return (
-        <ListItem>
-            <ListItemAvatar>
-                <Avatar>
+        <ListItem button>
+            <ListItemIcon>
                 <GamepadOutlined />
-                </Avatar>
-            </ListItemAvatar>
+            </ListItemIcon>
             <ListItemText
                 primary={game.gameName}
             />
