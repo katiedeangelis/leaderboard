@@ -17,7 +17,7 @@ const store = createStore(siteReducer, {
 
 const theme = createMuiTheme({
     palette: {
-        type: "dark",
+        type: "light",
     },
     typography: { useNextVariants: true },
   });
