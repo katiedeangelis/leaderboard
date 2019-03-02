@@ -26,6 +26,7 @@ import EditOutlined from '@material-ui/icons/EditOutlined';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Tooltip from '@material-ui/core/Tooltip';
 import { Actions } from '../../lib/actions';
+import GYKLogo from "./GYK_Logo.png";
 
 const drawerWidth = 240;
 
@@ -84,6 +85,10 @@ const styles = theme => ({
     },
     header: {
         paddingRight: 24,
+        alignItems: 'center',
+    },
+    logo: {
+        height: 30,
     },
     toolbar: {
         display: 'flex',
@@ -221,9 +226,7 @@ class Application extends Component {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" color="inherit" noWrap>
-              GYK Antler
-            </Typography>
+            <img src={GYKLogo} className={classes.logo}></img>
             <div className={classes.grow} />
             <div className={classes.search}>
                 <div className={classes.searchIcon}>
