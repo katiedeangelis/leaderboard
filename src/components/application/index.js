@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
-import './index.scss';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -18,15 +16,14 @@ import SearchIcon from '@material-ui/icons/Search';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import IconButton from '@material-ui/core/IconButton';
 import GamepadOutlined from '@material-ui/icons/GamepadOutlined';
 import EditOutlined from '@material-ui/icons/EditOutlined';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Tooltip from '@material-ui/core/Tooltip';
 import { Actions } from '../../lib/actions';
 import GYKLogo from "./GYK_Logo.png";
+import Body from "../body";
 
 const drawerWidth = 240;
 
@@ -96,10 +93,6 @@ const styles = theme => ({
         justifyContent: 'flex-end',
         padding: '0 8px',
         ...theme.mixins.toolbar,
-    },
-    content: {
-        flexGrow: 1,
-        padding: theme.spacing.unit * 3,
     },
     title: {
         display: 'none',
@@ -187,26 +180,6 @@ class Application extends Component {
   render() {
     const { classes, theme } = this.props;
 
-    let gameList = this.props.gameList.map(game => {
-      return (
-        <ListItem button>
-            <ListItemIcon>
-                <GamepadOutlined />
-            </ListItemIcon>
-            <ListItemText
-                primary={game.gameName}
-            />
-            <ListItemSecondaryAction>
-                <Tooltip title="Submit Score">
-                    <IconButton aria-label="Submit Score">
-                    <EditOutlined />
-                    </IconButton>
-                </Tooltip>
-            </ListItemSecondaryAction>
-        </ListItem>
-        )
-    })
-
     return ( <div className={classes.root}>
         <CssBaseline />
         <AppBar
@@ -272,12 +245,7 @@ class Application extends Component {
             ))}
           </List>
         </Drawer>
-        <main className={classes.content}>
-          <div className={classes.toolbar} />
-          <List paragraph>
-          {gameList}
-          </List>
-        </main>
+        <Body gameList={this.props.gameList}/>
       </div>
     );
   }
