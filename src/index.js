@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/application';
+import App from './components/application/application';
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
@@ -9,6 +9,7 @@ import siteReducer from './lib/reducer'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 const store = createStore(siteReducer, {
+    navigation: false,
     gameList: [],
     openGameLeaderboard: {}
 }, composeWithDevTools(

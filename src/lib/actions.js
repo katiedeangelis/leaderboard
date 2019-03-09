@@ -8,7 +8,8 @@ function _processAction(url, callback) {
 };
 
 export const ActionTypes = {
-    SEARCH: "SEARCH"
+    SEARCH: "SEARCH",
+    TOGGLENAV: "TOGGLENAV"
 }
 
 export const Actions = {
@@ -18,6 +19,12 @@ export const Actions = {
             _processAction('/api/searchGameList?gameName=' + gameName, function(data){
                 dispatch(_privateActions.search(data));
             });
+        }
+    },
+    toggleNav: function (navState) {
+        return {
+            type: ActionTypes.TOGGLENAV,
+            navState: navState
         }
     }
 }

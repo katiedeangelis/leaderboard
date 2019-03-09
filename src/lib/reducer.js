@@ -7,6 +7,10 @@ export default function(state={}, action) {
             console.log(action);
             state.gameList = action.gameList;
             return Immutable.fromJS(state).toJS();
+        case ActionTypes.TOGGLENAV:
+            console.log(action);
+            state.navigation = action.navState;
+            return Immutable.fromJS(state).toJS();
         default:
             return state;
     }
